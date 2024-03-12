@@ -22,7 +22,6 @@ export const getAllArticles = (topic) => {
 
 export const fetchArticleById = (article_id) => {
   return articlesApi.get(`/articles/${article_id}`).then((res) => {
-    console.log(res.data.article)
     return res.data.article;
   });
 };

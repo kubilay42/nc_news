@@ -28,3 +28,34 @@
 .nav-link{
   margin:0.5em;
 }
+.article-img{
+  width: 400px;
+}
+
+.body{
+  text-align: center;
+  font-size: larger;
+  padding-top:0.5 em;
+  padding-bottom:0.5 em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.author{
+  margin-left: 2em;
+  text-align: left;
+  border-top: solid black;
+
+}
+.votes{
+  margin-left: 2em;
+  text-align: left;
+}
+.created_at{
+  margin-left: 2em;
+  text-align: left;
+}
+.title{
+  border-top: solid black;
+
+}
