@@ -10,9 +10,10 @@ export default function ArticlesList() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true)
     getAllArticles().then((articles) => {
-      setArticlesList(articles)
       setLoading(false)
+      setArticlesList(articles)
     });
   }, []);
 
@@ -22,7 +23,8 @@ export default function ArticlesList() {
       <Navbar />
       <h1>Articles</h1>
       {articlesList.map((article) => {
-        return <ArticleCard key={article.article_id} article={article} />;
+        return <ArticleCard key={article.article_id} article={article} 
+        />;
       })}
     </>);
 }
