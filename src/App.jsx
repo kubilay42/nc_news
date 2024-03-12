@@ -5,7 +5,8 @@ import Home from "./components/Home";
 import Users from "./components/Users";
 import Articles from "./components/Articles";
 import UserContext from "./contexts/User";
-
+import SingleArticle from "./components/SingleArticle";
+ 
 export default function App() {
   const [loggedInUser, setLoggedInUser] = useState({
     username: "tickle122",
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/" element={<Home user={user} setUser={setUser} />} />
           <Route path="/users" element={<Users />} />
           <Route path="/articles" element={<Articles />} />
+          <Route path="/articles/:article_id" element={<SingleArticle />}/>
         </Routes>
       </UserContext.Provider>
     </>
