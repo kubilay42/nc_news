@@ -1,17 +1,21 @@
 import axios from "axios";
 
-export const getAllUsers = () => {
-    return axios
-      .get("https://newmakers.onrender.com/api/users")
-      .then(({data}) => {
-        return data.users;
-      })
-  };
+export const articlesApi = axios.create({
+  baseURL: "https://newmakers.onrender.com/api",
+});
 
-  export const getAllArticles = (topic) => {
-    return axios
-      .get("https://newmakers.onrender.com/api/articles")
-      .then(({data}) => {
-        return data.articles;
-      })
-  };
+export const getAllUsers = () => {
+  return articlesApi
+    .get("/users")
+    .then(({ data }) => {
+      return data.users;
+    });
+};
+
+export const getAllArticles = (topic) => {
+  return articlesApi
+    .get("/articles")
+    .then(({ data }) => {
+      return data.articles;
+    });
+};
