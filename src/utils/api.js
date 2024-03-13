@@ -31,3 +31,11 @@ export const getComments = (article_id) => {
     return res.data.comments
   })
 }
+
+export const updateArticleVotes = (articleId, voteChange) => {
+  return articlesApi
+    .patch(`/articles/${articleId}`, { inc_votes: voteChange })
+    .then((response) => {
+      return response.data.article;
+    })
+};
