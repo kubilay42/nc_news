@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { fetchArticleById } from '../utils/api';
 import { Loading } from './Loading';
 import Navbar from './Navbar';
+import CommentsList from './Comments';
 
 export default function SingleArticle () {
     const [article, setArticle] = useState()
@@ -32,6 +33,6 @@ export default function SingleArticle () {
             <p className='author'>Author: {article.author}</p>
             <p className='votes'>Votes: {article.votes}</p>
             <p className='created_at'>Created at: {article.created_at}</p>
-
+            <CommentsList/>
           </>);
     }
