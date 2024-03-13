@@ -2,17 +2,19 @@ import { getComments } from "../utils/api";
 import { useState, useEffect } from "react";
 import CommentCard from "./CommentCard";
 import { useParams } from 'react-router-dom';
-import { Loading } from "./Loading";
+import PostComment from "./PostComment";
+
 
 export default function CommentsList() {
   const [commentsList, setCommentsList] = useState([]);
   const { article_id } = useParams();
+
   const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
     setLoading(true)
-    getComments(article_id).then((comments) => {
+    getComments(article_id, username).then((comments) => {
       setLoading(false)
       setCommentsList(comments)
     });
@@ -26,9 +28,12 @@ export default function CommentsList() {
       ) : commentsList.length === 0 ? (
         <p>No comments available.</p>
       ) : (
-        commentsList.map((comment) => (
+        <>
+        <PostComment setCommentsList={setCommentsList} article_id={article_id}/>
+        {commentsList.map((comment) => (
           <CommentCard key={comment.comment_id} comment={comment} />
-        ))
+        ))}
+        </>
       )}
     </div>
   );

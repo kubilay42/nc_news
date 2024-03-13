@@ -13,8 +13,8 @@ export default function UsersList() {
   useEffect(() => {
     setLoading(true)
     getAllUsers().then((users) => {
-      setLoading(false)
         setUsersList(users);
+        setLoading(false)
     });
   }, []);
 

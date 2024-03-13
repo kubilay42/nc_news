@@ -10,6 +10,7 @@ export default function SingleArticle() {
   const [article, setArticle] = useState();
   const [loading, setLoading] = useState(true);
   const { article_id } = useParams();
+  
 
   useEffect(() => {
     setLoading(true);

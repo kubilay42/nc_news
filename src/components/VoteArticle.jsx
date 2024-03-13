@@ -4,8 +4,10 @@ import "../App.css";
 
 const VoteArticle = ({ articleId, setArticle }) => {
   const [voting, setVoting] = useState(false);
+  const [hasVoted, setHasVoted] = useState(false);
 
   const handleVote = (voteChange) => {
+    if (!hasVoted){
     setVoting(true);
     setArticle((prevArticle) => ({
       ...prevArticle,
@@ -17,13 +19,14 @@ const VoteArticle = ({ articleId, setArticle }) => {
       });
     });
     setVoting(false);
+    setHasVoted(true)}
   };
 
   return (
     <div className="vote-article">
       <h3>Vote for this article:</h3>
-      <button onClick={() => handleVote(1)}>LIKE</button>
-      <button onClick={() => handleVote(-1)}>DISLIKE</button>
+      <button onClick={() => handleVote(1)} disabled={hasVoted}>LIKE</button>
+      <button onClick={() => handleVote(-1)} disabled={hasVoted}>DISLIKE</button>
     </div>
   );
 };
