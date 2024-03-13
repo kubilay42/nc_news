@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { updateArticleVotes } from "../utils/api";
 import "../App.css";
-import { Loading } from "./Loading";
 
 const VoteArticle = ({ articleId, setArticle }) => {
   const [voting, setVoting] = useState(false);
