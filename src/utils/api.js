@@ -5,19 +5,15 @@ export const articlesApi = axios.create({
 });
 
 export const getAllUsers = () => {
-  return articlesApi
-    .get("/users")
-    .then(({ data }) => {
-      return data.users;
-    });
+  return articlesApi.get("/users").then(({ data }) => {
+    return data.users;
+  });
 };
 
 export const getAllArticles = (topic) => {
-  return articlesApi
-    .get("/articles")
-    .then(({ data }) => {
-      return data.articles;
-    });
+  return articlesApi.get("/articles").then(({ data }) => {
+    return data.articles;
+  });
 };
 
 export const fetchArticleById = (article_id) => {
@@ -28,14 +24,28 @@ export const fetchArticleById = (article_id) => {
 
 export const getComments = (article_id) => {
   return articlesApi.get(`/articles/${article_id}/comments`).then((res) => {
-    return res.data.comments
-  })
-}
+    return res.data.comments;
+  });
+};
 
-export const updateArticleVotes = (articleId, voteChange) => {
+export const updateArticleVotes = (article_id, voteChange) => {
   return articlesApi
-    .patch(`/articles/${articleId}`, { inc_votes: voteChange })
+    .patch(`/articles/${article_id}`, { inc_votes: voteChange })
     .then((response) => {
       return response.data.article;
-    })
+    });
+};
+
+export const postComment = (newCommentText, article_id, user) => {
+
+  const postBody = {
+    username: user.username,
+    body: newCommentText,
+  };
+  if(newCommentText.length>0)
+  {return articlesApi
+    .post(`/articles/${article_id}/comments`, postBody)
+    .then(({ data }) => {
+      return data.comment;
+    });}
 };
