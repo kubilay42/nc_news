@@ -9,6 +9,7 @@ import { useContext } from 'react';
 import UserContext from '../contexts/User';
 
 export default function SingleArticle() {
+  const[newVote, setNewVote] = useState(0)
   const { currentUser } = useContext(UserContext)
   const [article, setArticle] = useState();
   const [loading, setLoading] = useState(true);
@@ -24,7 +25,7 @@ export default function SingleArticle() {
     });
   }, [article_id]);
 
-  return loading || !article ? (
+  return loading ? (
     <>
       <Loading />
     </>
@@ -36,9 +37,9 @@ export default function SingleArticle() {
       <p className="topic">Topic: {article.topic}</p>
       <p className="body">{article.body}</p>
       <p className="author">Author: {article.author}</p>
-      <p className="votes">Votes: {article.votes}</p>
+      <p className="votes">Votes: {article.votes + newVote}</p>
       <p className="created_at">Created at: {article.created_at}</p>
-      <VoteArticle articleId={article_id} setArticle={setArticle}/>
+      <VoteArticle articleId={article_id} setNewVote= {setNewVote}/>
       <CommentsList currentUser={currentUser}/>
     </>
   );

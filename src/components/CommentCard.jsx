@@ -17,9 +17,9 @@ const CommentCard = ({ comment, setCommentsList }) => {
   return (
     <>
       <p className="comment-body">{comment.body}</p>
-      <p className="comment-author">author: {comment.author}</p>
+      <p className="comment-votes">Votes:{comment.votes}</p>
+      <p className="comment-author">Author: {comment.author.toUpperCase()}</p>
       <p className="comment-created_at">{comment.created_at}</p>
-      <p className="comment-votes">votes:{comment.votes}</p>
       {loggedInUser.username === comment.author ? (
         <button onClick={handleDelete} >Delete your comment</button>
       ) : (
