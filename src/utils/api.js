@@ -37,15 +37,18 @@ export const updateArticleVotes = (article_id, voteChange) => {
 };
 
 export const postComment = (newCommentText, article_id, user) => {
-
   const postBody = {
     username: user.username,
     body: newCommentText,
   };
-  if(newCommentText.length>0)
-  {return articlesApi
-    .post(`/articles/${article_id}/comments`, postBody)
-    .then(({ data }) => {
-      return data.comment;
-    });}
+  if (newCommentText.length > 0) {
+    return articlesApi
+      .post(`/articles/${article_id}/comments`, postBody)
+      .then(({ data }) => {
+        return data.comment;
+      });
+  }
+};
+export const deleteComment = (comment_id, user) => {
+  return articlesApi.delete(`/comments/${comment_id}`);
 };

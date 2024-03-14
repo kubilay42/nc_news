@@ -5,8 +5,11 @@ import { Loading } from "./Loading";
 import Navbar from "./Navbar";
 import CommentsList from "./Comments";
 import VoteArticle from "./VoteArticle";
+import { useContext } from 'react';
+import UserContext from '../contexts/User';
 
 export default function SingleArticle() {
+  const { currentUser } = useContext(UserContext)
   const [article, setArticle] = useState();
   const [loading, setLoading] = useState(true);
   const { article_id } = useParams();
@@ -36,7 +39,7 @@ export default function SingleArticle() {
       <p className="votes">Votes: {article.votes}</p>
       <p className="created_at">Created at: {article.created_at}</p>
       <VoteArticle articleId={article_id} setArticle={setArticle}/>
-      <CommentsList />
+      <CommentsList currentUser={currentUser}/>
     </>
   );
 }

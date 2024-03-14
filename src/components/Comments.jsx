@@ -9,12 +9,13 @@ export default function CommentsList() {
   const [commentsList, setCommentsList] = useState([]);
   const { article_id } = useParams();
 
+
   const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
     setLoading(true)
-    getComments(article_id, username).then((comments) => {
+    getComments(article_id).then((comments) => {
       setLoading(false)
       setCommentsList(comments)
     });
@@ -31,7 +32,7 @@ export default function CommentsList() {
         <>
         <PostComment setCommentsList={setCommentsList} article_id={article_id}/>
         {commentsList.map((comment) => (
-          <CommentCard key={comment.comment_id} comment={comment} />
+          <CommentCard key={comment.comment_id} comment={comment} setCommentsList={setCommentsList} />
         ))}
         </>
       )}
