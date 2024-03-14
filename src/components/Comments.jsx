@@ -9,9 +9,7 @@ export default function CommentsList() {
   const [commentsList, setCommentsList] = useState([]);
   const { article_id } = useParams();
 
-
   const [loading, setLoading] = useState(true);
-
 
   useEffect(() => {
     setLoading(true)

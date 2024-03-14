@@ -5,7 +5,7 @@ const Home = ({}) => {
   return (
     <>
     <Link to="/users">
-      <button> click to select a user</button>
+      <button> <h1>Select a user to login</h1></button>
     </Link>
     </>
   );

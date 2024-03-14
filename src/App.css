@@ -68,3 +68,15 @@
 .vote-article{
   border: solid black;
 }
+.comment-created_at{
+  text-align: left;
+  font-size:small;
+}
+.comment-author{
+  text-align: left;
+  font-size:small
+}
+.userCard{
+  border: solid black;
+
+}

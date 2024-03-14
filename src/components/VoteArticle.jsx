@@ -2,22 +2,21 @@ import { useState } from "react";
 import { updateArticleVotes } from "../utils/api";
 import "../App.css";
 
-const VoteArticle = ({ articleId, setArticle }) => {
+const VoteArticle = ({ articleId, setNewVote }) => {
   const [voting, setVoting] = useState(false);
   const [hasVoted, setHasVoted] = useState(false);
 
   const handleVote = (voteChange) => {
     if (!hasVoted){
     setVoting(true);
-    setArticle((prevArticle) => ({
-      ...prevArticle,
-      votes: prevArticle.votes + voteChange,
-    }));
-    updateArticleVotes(articleId, voteChange).then(() => {
-      setArticle((updatedArticle) => {
-        setArticle(updatedArticle);
-      });
+    setNewVote((currVote) => {
+      return currVote + voteChange
     });
+    updateArticleVotes(articleId, voteChange).catch(()=> {
+      setNewVote((currVote) => {
+        return currVote - voteChange
+      })
+    })
     setVoting(false);
     setHasVoted(true)}
   };
