@@ -29,7 +29,7 @@ export default function UsersList() {
   <Loading />
   ) : (
     <>
-    <p id="username">{loggedInUser.username.toUpperCase()}</p>
+    <p id="username">{loggedInUser.username.toUpperCase}</p>
       <p>is logged in</p>
       <img id="loggedin-img" src={loggedInUser.avatar_url}></img>
       <br></br>
