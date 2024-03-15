@@ -7,6 +7,7 @@ import CommentsList from "./Comments";
 import VoteArticle from "./VoteArticle";
 import { useContext } from 'react';
 import UserContext from '../contexts/User';
+import { Link } from "react-router-dom";
 
 export default function SingleArticle() {
   const[newVote, setNewVote] = useState(0)
@@ -35,7 +36,12 @@ export default function SingleArticle() {
       {loading ? (
         <Loading />
       ) : error ? (
-        <p>That article does not exist</p>
+        <>
+        <p>That article does not exist, </p>
+        <Link to="/articles">
+        check some other articles here.
+        </Link>
+        </>
       ) : (
         <>
 
