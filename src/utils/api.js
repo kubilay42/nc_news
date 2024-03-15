@@ -56,7 +56,6 @@ export const deleteComment = (comment_id, user) => {
 
 export const getAllTopics = () => {
   return articlesApi.get("/topics").then(({data}) => {
-    console.log(data.topics)
     return data.topics
 })
 }
