@@ -14,24 +14,31 @@ export default function SingleArticle() {
   const [article, setArticle] = useState();
   const [loading, setLoading] = useState(true);
   const { article_id } = useParams();
+  const [error, setError] = useState(false)
   
 
   useEffect(() => {
     setLoading(true);
-
     fetchArticleById(article_id).then((articleData) => {
+    setError(false)
       setLoading(false);
       setArticle(articleData);
-    });
+    }).catch(() => {
+        setLoading(false);
+        setError(true);
+      });
   }, [article_id]);
 
-  return loading ? (
-    <>
-      <Loading />
-    </>
-  ) : (
-    <>
+  return (
+    <div>
       <Navbar />
+      {loading ? (
+        <Loading />
+      ) : error ? (
+        <p>That article does not exist</p>
+      ) : (
+        <>
+
       <h1 className="title">{article.title}</h1>
       <img className="article-img" src={article.article_img_url}></img>
       <p className="topic">Topic: {article.topic}</p>
@@ -41,6 +48,8 @@ export default function SingleArticle() {
       <p className="created_at">Created at: {article.created_at}</p>
       <VoteArticle articleId={article_id} setNewVote= {setNewVote}/>
       <CommentsList currentUser={currentUser}/>
-    </>
+      </>
+      )}
+    </div>
   );
 }

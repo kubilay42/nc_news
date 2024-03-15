@@ -10,7 +10,8 @@ import "../App.css";
 
 
 
-export default function UsersList() {
+function UsersList() {
+   const [error, setError] = useState(false);
   const [usersList, setUsersList] = useState([]);
   const [loading, setLoading] = useState(true);
   const { loggedInUser } = useContext(UserContext);
@@ -20,25 +21,36 @@ export default function UsersList() {
   useEffect(() => {
     setLoading(true)
     getAllUsers().then((users) => {
-        setUsersList(users);
-        setLoading(false)
-    });
+      setError(false)
+      setUsersList(users);
+      setLoading(false)
+    }).catch(()=> {
+      setError(true)
+      setLoading(false)
+    })
   }, []);
 
-  return loading ? (
-  <Loading />
-  ) : (
+  return(
+    <div>
+
     <>
-    <p id="username">{loggedInUser.username.toUpperCase}</p>
+    {loading ? 
+    (<Loading/>):
+    (<>
+    <p id="username">{loggedInUser.username.toUpperCase()}</p>
       <p>is logged in</p>
       <img id="loggedin-img" src={loggedInUser.avatar_url}></img>
       <br></br>
     <Navbar/>
       <h1>Select a User to Login</h1>
       {usersList.map((user) => {
-
         return (<UserCard key={user.username} user={user} />)
       })}
     </>
-  );
-}
+    )}
+    </>
+    {error ? <p>Something went wrong...</p> : null}
+    </div>
+)}
+
+export default UsersList
