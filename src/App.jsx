@@ -6,7 +6,8 @@ import Users from "./components/Users";
 import Articles from "./components/Articles";
 import UserContext from "./contexts/User";
 import SingleArticle from "./components/SingleArticle";
- 
+import ErrorPage from "./components/ErrorPage";
+
 export default function App() {
   const [loggedInUser, setLoggedInUser] = useState({
     username: "tickle122",
@@ -23,7 +24,8 @@ export default function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/articles/:article_id" element={<SingleArticle />}/>
-        </Routes>
+          <Route path="*" element={<ErrorPage />} />
+          </Routes>
       </UserContext.Provider>
     </>
   );

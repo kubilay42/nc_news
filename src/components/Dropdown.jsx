@@ -23,7 +23,7 @@ function Dropdown({ searchParams, setSearchParams }) {
         handleChange("topic", event.target.value);
       }}
     >
-      <option disabled>Select</option>
+      <option disabled>Select a topic</option>
       {topics.map((topic) => {
         return (
           <option key={topic.slug} value={topic.slug}>

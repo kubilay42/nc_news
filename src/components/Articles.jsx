@@ -5,8 +5,11 @@ import ArticleCard from "./ArticleCard";
 import { Loading } from "./Loading";
 import Dropdown from "./Dropdown";
 import { useSearchParams } from "react-router-dom";
+import Sortby from "./Sortby";
+import { Link } from "react-router-dom";
 
 export default function ArticlesList() {
+  const [error, setError] = useState(false);
   const [articlesList, setArticlesList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,10 +17,16 @@ export default function ArticlesList() {
 
   useEffect(() => {
     setLoading(true);
-    getAllArticles(topicsQuery).then((articles) => {
-      setArticlesList(articles);
-      setLoading(false);
-    });
+    getAllArticles(topicsQuery)
+      .then((articles) => {
+        setError(false);
+        setArticlesList(articles);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+        setError(true);
+      });
   }, [topicsQuery]);
 
   return (
@@ -25,17 +34,27 @@ export default function ArticlesList() {
       <Navbar />
       <br></br>
       <br></br>
-
-      <Dropdown
+      <Dropdown searchParams={searchParams} setSearchParams={setSearchParams} />
+      <br></br>
+      <br></br>
+      <Sortby
+        setArticlesList={setArticlesList}
         searchParams={searchParams}
         setSearchParams={setSearchParams}
       />
-      { (topicsQuery) ?
-      ( <h2>Articles About {topicsQuery.toUpperCase()}</h2>) :
-      (<h1>ALL ARTICLES</h1>)
-      }
+      {topicsQuery ? (
+        <h2>Articles About {topicsQuery.toUpperCase()}</h2>
+      ) : (
+        <h1>ALL ARTICLES</h1>
+      )}
       {loading ? (
         <Loading />
+      ) : error ? (
+        <p>There is no article in here,    <br></br>
+          <Link to="/articles">
+           search another article
+          </Link>
+          </p>
       ) : (
         <>
           {articlesList.map((article) => {
