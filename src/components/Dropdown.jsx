@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { getAllTopics } from "../utils/api";
-import { Link } from "react-router-dom";
 
 function Dropdown({ searchParams, setSearchParams }) {
   const [topics, setTopics] = useState([]);
@@ -16,7 +15,7 @@ function Dropdown({ searchParams, setSearchParams }) {
     getAllTopics().then((topics) => {
       setTopics(topics);
     });
-  }, [setTopics]);
+  }, [topics]);
 
   return (
     <select
@@ -25,9 +24,9 @@ function Dropdown({ searchParams, setSearchParams }) {
       }}
     >
       <option disabled>Select</option>
-      {topics.map((topic, index) => {
+      {topics.map((topic) => {
         return (
-          <option key={index} value={topic.slug}>
+          <option key={topic.slug} value={topic.slug}>
             {topic.slug.toUpperCase()}
           </option>
         );
