@@ -11,7 +11,9 @@ export const getAllUsers = () => {
 };
 
 export const getAllArticles = (topic) => {
-  return articlesApi.get("/articles").then(({ data }) => {
+  return articlesApi.get("/articles", {
+    params: { topic },
+  }).then(({ data }) => {
     return data.articles;
   });
 };
@@ -51,3 +53,11 @@ export const postComment = (newCommentText, article_id, user) => {
 export const deleteComment = (comment_id, user) => {
   return articlesApi.delete(`/comments/${comment_id}`);
 };
+
+export const getAllTopics = () => {
+  return articlesApi.get("/topics").then(({data}) => {
+    console.log(data.topics)
+    return data.topics
+})
+}
+
